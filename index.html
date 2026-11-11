@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Balances · Funding Forecast | TabaPay Portal (concept)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.19.0/dist/tabler-icons.min.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <aside class="side">
+    <div class="side-head"><img src="assets/tabapay-logo.svg" alt="TabaPay"><i class="ti ti-layout-sidebar-left-collapse"></i></div>
+    <div class="org"><i class="ti ti-building-store"></i><div>ACME 2<small>90123456</small></div><i class="ti ti-chevron-right chev"></i></div>
+    <ul class="nav">
+      <li><i class="ti ti-layout-board-split"></i>Overview</li>
+      <li><i class="ti ti-report-analytics"></i>Report Builder <span class="beta">Beta</span></li>
+      <li><i class="ti ti-zoom-money"></i>Transactions</li>
+      <li><i class="ti ti-chart-pie"></i>Insights Hub</li>
+      <li><i class="ti ti-file-text"></i>Reporting</li>
+      <li><i class="ti ti-file-dollar"></i>Invoice</li>
+      <li class="active"><i class="ti ti-building-bank"></i>Balances</li>
+    </ul>
+    <hr>
+    <div class="grp">My Organization</div>
+    <ul class="nav"><li><i class="ti ti-user-circle"></i>Users</li></ul>
+  </aside>
+  <main class="main">
+    <header class="top">
+      <div class="crumb"><i class="ti ti-building"></i>ACME <span class="muted">Client ID: 1234567</span><span class="sep">/</span><i class="ti ti-building-store"></i>ACME 2 <span class="muted">Subclient ID: 90123456</span></div>
+      <div class="top-r"><i class="ti ti-circle-arrow-down"></i><i class="ti ti-help-octagon"></i><div class="avatar">MG</div></div>
+    </header>
+    <div class="content">
+      <div class="page-h"><h1>Balances</h1><button class="btn-outline"><i class="ti ti-download"></i>Download CSV</button></div>
+      <div class="banktabs"><div>Cross River Bank</div></div>
+      <div class="toolbar">
+        <div class="seg"><button><i class="ti ti-layout-list"></i>List</button><button><i class="ti ti-table"></i>Table</button><button class="on"><i class="ti ti-calendar-dollar"></i>Funding Forecast <span class="new">New</span></button></div>
+        <div class="refresh" id="refresh"></div>
+      </div>
+
+      <section class="acct" id="acct"></section>
+
+      <section class="card">
+        <div class="card-h"><span class="ic"><i class="ti ti-calendar-dollar"></i></span><h2>Funding Forecast</h2><span class="sub" id="ff-sub"></span>
+          <div class="right">Target shortfall risk <div class="seg sm" id="alpha"></div></div></div>
+        <div class="split">
+          <div id="today"></div>
+          <div id="limit"></div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="chart-h"><h3>Projected Available Balance</h3><select class="select" id="winsel"></select></div>
+        <div class="chart" id="chart"><div class="tip" id="tip"></div></div>
+        <div class="legend" id="legend"></div>
+      </section>
+
+      <section class="card">
+        <div class="card-h"><span class="ic"><i class="ti ti-calendar-event"></i></span><h2>Funding Calendar</h2><span class="sub">Each row is one funding window: from a business-day funding (09:00 PT) to the next one. Click a row to chart it.</span></div>
+        <div class="tbl-wrap" style="padding-top:12px"><table class="tbl" id="cal"></table></div>
+      </section>
+
+      <section class="card">
+        <div class="card-h"><span class="ic"><i class="ti ti-history"></i></span><h2>Backtest</h2><span class="sub" id="bt-sub"></span></div>
+        <div class="bt"><div id="bt-main"></div><div id="bt-kind"></div></div>
+      </section>
+
+      <section class="card">
+        <div class="card-h"><span class="ic"><i class="ti ti-math-function"></i></span><h2>How it's calculated</h2></div>
+        <div class="how" id="how"></div>
+      </section>
+      <div class="foot">Unofficial concept demo by Mohith Gajjela. Not affiliated with TabaPay. Synthetic data.</div>
+      <div class="err" id="err"></div>
+    </div>
+  </main>
+</div>
+<script>
+  window.__errors = [];
+  window.addEventListener('error', (e) => { window.__errors.push(String(e.message)); const el = document.getElementById('err'); if (el) el.textContent = 'ERR ' + window.__errors.join(' | '); });
+  window.addEventListener('unhandledrejection', (e) => { window.__errors.push(String(e.reason)); const el = document.getElementById('err'); if (el) el.textContent = 'ERR ' + window.__errors.join(' | '); });
+</script>
+<script type="module" src="app.js"></script>
+</body>
+</html>
